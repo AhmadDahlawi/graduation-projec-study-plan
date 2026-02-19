@@ -1,0 +1,33 @@
+.
+├── API_GUIDE.md
+├── README.md
+├── SETUP_GUIDE.md
+├── backend
+│   ├── database.py
+│   ├── main.py
+│   ├── models.py
+│   ├── requirements.txt
+│   ├── schemas.py
+│   └── study_plan.db
+├── frontend
+│   ├── components.json
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── jsconfig.json
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   └── vite.svg
+│   ├── src
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── assets
+│   │   ├── components
+│   │   ├── hooks
+│   │   ├── index.css
+│   │   ├── lib
+│   │   └── main.jsx
+│   └── vite.config.js
+└── project_structure.txt
+
+8 directories, 22 files
