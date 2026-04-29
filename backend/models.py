@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Table, Text
+from sqlalchemy import Column, Integer, String, ForeignKey, Table, Text, DateTime, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from database import Base
@@ -25,15 +25,15 @@ class Course(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     semester = Column(String, nullable=False)
-    nameAr = Column(String, nullable=False)
-    nameEn = Column(String, nullable=False)
+    name_ar = Column(String, nullable=False)
+    name_en = Column(String, nullable=False)
     code = Column(String, nullable=False, unique=True, index=True)
     credits = Column(Integer, nullable=False)
     type = Column(String, nullable=False)  # Required or Elective
     mode = Column(String, nullable=False)  # In-Person, Online, Hybrid
-    lectureHours = Column(Integer, default=0)
-    labHours = Column(Integer, default=0)
-    trainingHours = Column(Integer, default=0)
+    lecture_hours = Column(Integer, default=0)
+    lab_hours = Column(Integer, default=0)
+    training_hours = Column(Integer, default=0)
     department = Column(String, nullable=True)
     
     # Optional detailed fields
@@ -44,7 +44,7 @@ class Course(Base):
     materials = Column(Text, nullable=True)
     grading = Column(Text, nullable=True)
     schedule = Column(String, nullable=True)
-    officeHours = Column(String, nullable=True)
+    office_hours = Column(String, nullable=True)
     notes = Column(Text, nullable=True)
     
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -67,9 +67,21 @@ class Plan(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False, unique=True, index=True)
-    maxCreditsPerSemester = Column(Integer, default=18)
+    max_credits_per_semester = Column(Integer, default=18)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
     courses = relationship('Course', secondary=plan_courses, back_populates='plans')
+
+
+class User(Base):
+    __tablename__ = "users"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, nullable=False, unique=True, index=True)
+    email = Column(String, nullable=True, unique=True, index=True)
+    hashed_password = Column(String, nullable=False)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
